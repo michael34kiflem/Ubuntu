@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'react-feather';
 import '../css/Navbar.css'
-
+import Logo from '../Images/Logo.png'
 const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,8 +51,7 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
               handleNavClick('home');
             }}
           >
-            <span className="ubuntu-text">Ubuntu</span>
-            <span className="tech-text">Tech</span>
+         <img src={Logo}  alt='logo'  style={{width:250 , height:20}}/>
           </a>
         </div>
         
