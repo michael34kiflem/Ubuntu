@@ -10,8 +10,8 @@ const Hero = ({ id, darkMode }) => {
 
   // Images showing web and mobile app development
   const techImage = darkMode 
-    ? "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" // Dark: Developer working on multiple screens
-    : "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" ; // Light: Web and mobile interfaces
+    ? "https://res.cloudinary.com/dqwttbkqo/image/upload/v1751971057/r5se2z2u_dqbc3p.png" // Dark: Developer working on multiple screens
+    : "https://res.cloudinary.com/dqwttbkqo/image/upload/v1751970731/j4r24fag_jbpryy.png"; // Light: Web and mobile interfaces
 
   return (
     <section id={id} className={`hero-section ${darkMode ? 'dark' : ''}`}>
