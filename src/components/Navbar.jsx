@@ -3,7 +3,7 @@ import {
   Menu as MenuIcon
 } from '@mui/icons-material';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import SunnyIcon from '@mui/icons-material/Sunny';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {
   AppBar,
   Box,
@@ -19,8 +19,7 @@ import {
   Toolbar,
   Typography,
   useMediaQuery,
-  useTheme,
-  styled
+  useTheme
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -54,37 +53,6 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
     { id: 'contact', label: 'Contact' }
   ];
 
-  // Styled components for custom styling
-  const StyledAppBar = styled(AppBar)(({ theme }) => ({
-    backgroundColor: darkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-    backdropFilter: 'blur(10px)',
-    boxShadow: darkMode ? '0 2px 10px rgba(0, 0, 0, 0.3)' : '0 2px 10px rgba(110, 110, 110, 0.1)',
-    transition: 'all 0.3s ease',
-    '&.scrolled': {
-      padding: '1rem 0',
-      boxShadow: darkMode ? '0 4px 15px rgba(0, 0, 0, 0.3)' : '0 4px 15px rgba(0, 0, 0, 0.1)'
-    }
-  }));
-
-  const NavLink = styled('a')(({ theme }) => ({
-    position: 'relative',
-    fontSize: '1rem',
-    fontWeight: 500,
-    color: darkMode ? '#cbd5e1' : '#4a5568',
-    textDecoration: 'none',
-    transition: 'all 0.3s ease',
-    padding: '0.5rem 0',
-    fontFamily: '"Poppins", sans-serif',
-    fontWeight: 600,
-    '&:hover': {
-      color: darkMode ? '#60a5fa' : '#2563eb'
-    },
-    '&.active': {
-      color: darkMode ? '#60a5fa' : '#2563eb',
-      fontWeight: 'bold'
-    }
-  }));
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -102,21 +70,22 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
       sx={{ 
         width: 250,
         height: '100%',
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: darkMode ? '#121212' : theme.palette.background.paper,
+        color: darkMode ? '#ffffff' : theme.palette.text.primary,
         display: 'flex',
         flexDirection: 'column'
       }}
       role="presentation"
     >
       <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h6" component="div" className="title">
+        <Typography variant="h6" component="div" className='title' sx={{ color: darkMode ? '#ffffff' : 'inherit' }}>
           UBUNTU
         </Typography>
-        <IconButton onClick={handleDrawerToggle}>
+        <IconButton onClick={handleDrawerToggle} sx={{ color: darkMode ? '#ffffff' : 'inherit' }}>
           <CloseIcon />
         </IconButton>
       </Box>
-      <Divider />
+      <Divider sx={{ backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)' }} />
       <List>
         {navItems.map((item) => (
           <ListItem 
@@ -124,7 +93,8 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
             disablePadding
             sx={{
               backgroundColor: activeSection === item.id ? 
-                theme.palette.action.selected : 'transparent'
+                (darkMode ? 'rgba(255, 255, 255, 0.08)' : theme.palette.action.selected) : 'transparent',
+              color: darkMode ? '#ffffff' : 'inherit'
             }}
           >
             <ListItemButton onClick={() => handleNavClick(item.id)}>
@@ -132,24 +102,22 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
                 primary={item.label} 
                 primaryTypographyProps={{
                   fontWeight: activeSection === item.id ? 'bold' : 'normal',
-                  fontFamily: '"Poppins", sans-serif',
-                  color: activeSection === item.id ? 
-                    (darkMode ? '#60a5fa' : '#2563eb') : 
-                    (darkMode ? '#cbd5e1' : '#4a5568')
+                  color: darkMode ? '#ffffff' : 'inherit'
                 }}
               />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Box sx={{ mt: 'auto', p: 2, display: 'flex', alignItems: 'center' }}>
-        <SunnyIcon sx={{ color: darkMode ? 'grey.500' : 'primary.main' }} />
+      <Box sx={{ mt: 'auto', p: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <WbSunnyIcon sx={{ color: darkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }} />
         <Switch
           checked={darkMode}
           onChange={toggleDarkMode}
           inputProps={{ 'aria-label': 'toggle dark mode' }}
+          color="primary"
         />
-        <NightlightRoundIcon sx={{ color: darkMode ? 'primary.main' : 'grey.500' }} />
+        <NightlightRoundIcon sx={{ color: darkMode ? '#ffffff' : 'rgba(0, 0, 0, 0.7)' }} />
       </Box>
     </Box>
   );
@@ -157,19 +125,19 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
   return (
     <>
       <Slide appear={false} direction="down" in={visible}>
-        <StyledAppBar 
+        <AppBar 
           position="fixed" 
-          className={prevScrollPos > 50 ? 'scrolled' : ''}
+          color="default"
+          elevation={1}
           sx={{
+            backgroundColor: darkMode ? '#121212' : theme.palette.background.paper,
+            color: darkMode ? '#ffffff' : theme.palette.text.primary,
             transition: 'transform 0.3s ease-in-out',
-            borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`
+            borderBottom: darkMode ? '1px solid rgba(255, 255, 255, 0.12)' : `1px solid ${theme.palette.divider}`,
+            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
           }}
         >
-          <Toolbar sx={{ 
-            justifyContent: 'space-between',
-            padding: prevScrollPos > 50 ? '0.5rem 0' : '1.5rem 0',
-            transition: 'padding 0.3s ease'
-          }}>
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Box 
               component="a" 
               href="#home" 
@@ -181,13 +149,10 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
                 display: 'flex',
                 alignItems: 'center',
                 textDecoration: 'none',
-                color: darkMode ? '#ffffff' : '#1a1a1a'
+                color: darkMode ? '#ffffff' : 'inherit'
               }}
             >
-              <Typography variant="h6" component="div" sx={{ 
-                fontWeight: 900,
-                fontFamily: '"Poppins", sans-serif'
-              }}>
+              <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
                 UBUNTU
               </Typography>
             </Box>
@@ -210,12 +175,11 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
                         position: 'relative',
                         textDecoration: 'none',
                         color: activeSection === item.id ? 
-                          (darkMode ? '#60a5fa' : '#2563eb') : 
-                          (darkMode ? '#cbd5e1' : '#4a5568'),
+                          theme.palette.primary.main : 
+                          (darkMode ? '#ffffff' : theme.palette.text.primary),
                         fontWeight: activeSection === item.id ? 'bold' : 'normal',
-                        fontFamily: '"Poppins", sans-serif',
                         '&:hover': {
-                          color: darkMode ? '#60a5fa' : '#2563eb'
+                          color: theme.palette.primary.main
                         }
                       }}
                     >
@@ -229,7 +193,7 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
                             left: 0,
                             right: 0,
                             height: 2,
-                            backgroundColor: darkMode ? '#60a5fa' : '#2563eb'
+                            backgroundColor: theme.palette.primary.main
                           }}
                           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
@@ -240,30 +204,33 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
                 
                 <IconButton 
                   onClick={toggleDarkMode} 
-                  color="inherit"
                   sx={{
-                    '&:hover': {
-                      backgroundColor: darkMode ? 'rgba(96, 165, 250, 0.1)' : 'rgba(37, 99, 235, 0.1)'
-                    }
+                    color: darkMode ? '#ffffff' : 'inherit'
                   }}
                 >
-                  {darkMode ? <SunnyIcon/> : <NightlightRoundIcon />}
+                  {darkMode ? (
+                    <WbSunnyIcon sx={{ color: '#ffffff' }} />
+                  ) : (
+                    <NightlightRoundIcon sx={{ color: 'inherit' }} />
+                  )}
                 </IconButton>
               </Box>
             )}
 
             {isMobile && (
               <IconButton
-                color="inherit"
                 aria-label="open drawer"
                 edge="end"
                 onClick={handleDrawerToggle}
+                sx={{
+                  color: darkMode ? '#ffffff' : 'inherit'
+                }}
               >
                 <MenuIcon />
               </IconButton>
             )}
           </Toolbar>
-        </StyledAppBar>
+        </AppBar>
       </Slide>
 
       {/* Mobile drawer */}
@@ -279,9 +246,7 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: 250,
-              backgroundColor: darkMode ? 'rgba(15, 23, 42, 0.98)' : 'rgba(255, 255, 255, 0.98)',
-              backdropFilter: 'blur(10px)',
-              boxShadow: darkMode ? '0 4px 6px rgba(0, 0, 0, 0.3)' : '0 4px 6px rgba(0, 0, 0, 0.1)'
+              backgroundColor: darkMode ? '#121212' : theme.palette.background.paper,
             },
           }}
         >
