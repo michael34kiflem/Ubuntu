@@ -17,7 +17,10 @@
 .footer-brand h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
   color: white;
+  
 }
 
 .footer-brand p {

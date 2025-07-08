@@ -11,6 +11,7 @@
 
 }
 
+
 .hero-section.dark {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
@@ -156,7 +157,7 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
   .hero-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
   }
   

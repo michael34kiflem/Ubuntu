@@ -4,7 +4,7 @@
 /* Contact Section */
 .contact-section {
   padding: 80px 0;
-  background-color: #f8f9fa;
+  background-color: #ffff;
 }
 
 .dark .contact-section {
@@ -26,7 +26,8 @@
 
 .contact-title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+    font-weight: 900;
   color: #1a1a1a;
   margin-bottom: 20px;
 }
