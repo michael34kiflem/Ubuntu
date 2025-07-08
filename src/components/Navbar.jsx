@@ -51,7 +51,7 @@ const Navbar = ({ activeSection, darkMode, toggleDarkMode }) => {
               handleNavClick('home');
             }}
           >
-         <img src={Logo}  alt='logo'  style={{width:250 , height:20}}/>
+         <h1> UBUNTU</h1>
           </a>
         </div>
         
